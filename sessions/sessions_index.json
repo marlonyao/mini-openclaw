@@ -6,5 +6,13 @@
     "updated_at": "2026-05-11T16:45:35.041855+00:00",
     "message_count": 2,
     "token_estimate": 299
+  },
+  "main:feishu:test_sender": {
+    "key": "main:feishu:test_sender",
+    "session_id": "d802b51a96c342b0922dcf25bf892d5f",
+    "created_at": "2026-05-11T16:51:43.437755+00:00",
+    "updated_at": "2026-05-11T16:58:32.326770+00:00",
+    "message_count": 8,
+    "token_estimate": 185
   }
 }
