@@ -1,10 +1,10 @@
 {
   "main": {
     "key": "main",
-    "session_id": "345c19e27ebc4e94841d9365857d5cc4",
-    "created_at": "2026-05-11T16:02:45.922277+00:00",
-    "updated_at": "2026-05-11T16:02:48.697443+00:00",
-    "message_count": 4,
-    "token_estimate": 47
+    "session_id": "9ee8a48b1d1f48b6af9526606a61aa73",
+    "created_at": "2026-05-11T16:23:18.721890+00:00",
+    "updated_at": "2026-05-11T16:23:20.649067+00:00",
+    "message_count": 2,
+    "token_estimate": 25
   }
 }

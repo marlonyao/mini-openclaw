@@ -1,4 +1,2 @@
-{"id": "668b5aa514dd4e8e98dc458e6da58246", "role": "tool", "content": "Echo: hello", "created_at": "2026-05-11T16:02:46.976673+00:00", "tool_call_id": "call_00_zzoBrXCCuP7PqKUtlmv12242", "session_id": "345c19e27ebc4e94841d9365857d5cc4"}
-{"id": "f86f959d0dcc471fae7ec6551172503b", "role": "assistant", "content": "Done! The echo tool responded with \"hello\".", "created_at": "2026-05-11T16:02:47.897358+00:00", "session_id": "345c19e27ebc4e94841d9365857d5cc4"}
-{"id": "fb77f20170fb4bb99350ee925b9c6c13", "role": "user", "content": "What is the capital of France?", "created_at": "2026-05-11T16:02:47.899653+00:00", "session_id": "345c19e27ebc4e94841d9365857d5cc4"}
-{"id": "b5d8a97778164b1ba9b7ffe4dafcbd3d", "role": "assistant", "content": "The capital of France is **Paris**.", "created_at": "2026-05-11T16:02:48.696387+00:00", "session_id": "345c19e27ebc4e94841d9365857d5cc4"}
+{"id": "d2da4d978ecc4546993d9f8fce4102c8", "role": "tool", "content": "Echo: hello", "created_at": "2026-05-11T16:23:19.894029+00:00", "tool_call_id": "call_00_cWGi4sjeUZgi8nTPFCQw2246", "session_id": "9ee8a48b1d1f48b6af9526606a61aa73"}
+{"id": "9637c07ca5334baeaecd9e11f39c4a4b", "role": "assistant", "content": "Done! The echo tool returned: **hello**", "created_at": "2026-05-11T16:23:20.647156+00:00", "session_id": "9ee8a48b1d1f48b6af9526606a61aa73"}
