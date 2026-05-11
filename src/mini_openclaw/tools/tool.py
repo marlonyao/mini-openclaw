@@ -99,7 +99,10 @@ class ToolRegistry:
             )
         try:
             args = call.parse_arguments()
-            return await tool.execute(args)
+            result = await tool.execute(args)
+            # 传递原始 tool_call id
+            result.tool_call_id = call.id
+            return result
         except Exception as e:
             return ToolResult(
                 tool_call_id=call.id,

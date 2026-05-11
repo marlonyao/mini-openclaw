@@ -54,7 +54,7 @@ class CompletionResponse(BaseModel):
     content: str | None = None
     tool_calls: list[ToolCall] | None = None
     finish_reason: str | None = None
-    usage: dict[str, int] | None = None
+    usage: dict[str, object] | None = None
 
 
 class StreamChunk(BaseModel):
@@ -73,6 +73,34 @@ class LlmClientError(Exception):
         self.status_code = status_code
         self.response_body = response_body
         super().__init__(message)
+
+
+def _serialize_messages(messages: list[ChatMessage]) -> list[dict[str, Any]]:
+    """序列化消息列表，正确处理 tool_calls 的 OpenAI 格式"""
+    result: list[dict[str, Any]] = []
+    for m in messages:
+        d: dict[str, Any] = {"role": m.role}
+        if m.role == "assistant" and m.tool_calls:
+            # OpenAI 格式：tool_calls 需要 function 包装
+            d["content"] = m.content
+            d["tool_calls"] = [
+                {
+                    "id": tc.id,
+                    "type": "function",
+                    "function": {
+                        "name": tc.name,
+                        "arguments": tc.arguments,
+                    },
+                }
+                for tc in m.tool_calls
+            ]
+        elif m.role == "tool":
+            d["content"] = m.content
+            d["tool_call_id"] = m.tool_call_id
+        else:
+            d["content"] = m.content
+        result.append(d)
+    return result
 
 
 class AsyncLlmClient:
@@ -112,7 +140,7 @@ class OpenAiClient(AsyncLlmClient):
     def _build_body(self, request: CompletionRequest) -> dict[str, Any]:
         body: dict[str, Any] = {
             "model": request.model,
-            "messages": [m.model_dump(exclude_none=True) for m in request.messages],
+            "messages": _serialize_messages(request.messages),
             "stream": request.stream,
         }
         if request.temperature is not None:
@@ -120,7 +148,17 @@ class OpenAiClient(AsyncLlmClient):
         if request.max_tokens is not None:
             body["max_tokens"] = request.max_tokens
         if request.tools:
-            body["tools"] = [t.model_dump() for t in request.tools]
+            body["tools"] = [
+                {
+                    "type": "function",
+                    "function": {
+                        "name": t.name,
+                        "description": t.description,
+                        "parameters": t.parameters,
+                    },
+                }
+                for t in request.tools
+            ]
         return body
 
     def _parse_response(self, data: dict[str, Any]) -> CompletionResponse:

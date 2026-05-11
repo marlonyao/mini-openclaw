@@ -1,0 +1,10 @@
+{
+  "models_config_path": "./models.json",
+  "session_dir": "./sessions",
+  "workspace_dir": "./workspace",
+  "max_concurrent_runs": 4,
+  "compaction_enabled": true,
+  "context_pruning_enabled": true,
+  "dm_scope": "main",
+  "user_timezone": "Asia/Shanghai"
+}

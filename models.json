@@ -1,0 +1,35 @@
+{
+  "providers": {
+    "deepseek": {
+      "base_url": "https://api.deepseek.com/v1",
+      "api_key": "sk-0e3e0a0edb3145b68c39554b8180b10b",
+      "api_type": "openai-completions",
+      "models": [
+        {
+          "id": "deepseek-chat",
+          "name": "DeepSeek Chat",
+          "context_window": 200000,
+          "max_tokens": 8192
+        },
+        {
+          "id": "deepseek-v4-flash",
+          "name": "DeepSeek V4 Flash",
+          "context_window": 200000,
+          "max_tokens": 8192
+        }
+      ]
+    },
+    "moonshot": {
+      "base_url": "https://api.moonshot.cn/v1",
+      "api_key": "sk-FqWaPFiKq0PcvN5hAtS0g3gYLgQiqwPI8rZiw1fi8h2fTYKs",
+      "api_type": "openai-completions",
+      "models": [
+        {
+          "id": "kimi-k2.5",
+          "name": "Kimi K2.5",
+          "context_window": 200000
+        }
+      ]
+    }
+  }
+}
