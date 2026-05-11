@@ -34,6 +34,7 @@ from mini_openclaw.session.store import SessionStore
 from mini_openclaw.session.router import SessionRouter
 from mini_openclaw.agent.loop import AgentLoop, AgentConfig
 from mini_openclaw.tools.tool import ToolRegistry, EchoTool, ReadTool, WriteTool
+from mini_openclaw.tools.playwright_tool import BrowserTool
 from mini_openclaw.prompt.builder import SystemPromptBuilder, load_bootstrap_files
 from mini_openclaw.context.compaction import (
     ContextAssembler, compact_session, build_compaction_prompt,
@@ -104,11 +105,18 @@ def _resolve_provider_client(provider, use_mock: bool = False):
         return OpenAiClient(provider.base_url, provider.api_key), False
 
 
-def register_default_tools(workspace_dir: str = ".") -> ToolRegistry:
+def register_default_tools(workspace_dir: str = ".", include_browser: bool = True) -> ToolRegistry:
     tools = ToolRegistry()
     tools.register(EchoTool())
     tools.register(ReadTool(workspace_dir=workspace_dir))
     tools.register(WriteTool(workspace_dir=workspace_dir))
+    try:
+        import subprocess
+        subprocess.run(["playwright", "--version"], capture_output=True, timeout=5)
+        if include_browser:
+            tools.register(BrowserTool())
+    except (FileNotFoundError, Exception):
+        pass  # Playwright not installed, skip browser tool
     return tools
 
 
