@@ -35,6 +35,8 @@ from mini_openclaw.session.router import SessionRouter
 from mini_openclaw.agent.loop import AgentLoop, AgentConfig
 from mini_openclaw.tools.tool import ToolRegistry, EchoTool, ReadTool, WriteTool
 from mini_openclaw.tools.playwright_tool import BrowserTool
+from mini_openclaw.tools.exec_tool import ExecTool
+from mini_openclaw.tools.web_search_tool import WebSearchTool
 from mini_openclaw.prompt.builder import SystemPromptBuilder, load_bootstrap_files
 from mini_openclaw.context.compaction import (
     ContextAssembler, compact_session, build_compaction_prompt,
@@ -110,6 +112,8 @@ def register_default_tools(workspace_dir: str = ".", include_browser: bool = Tru
     tools.register(EchoTool())
     tools.register(ReadTool(workspace_dir=workspace_dir))
     tools.register(WriteTool(workspace_dir=workspace_dir))
+    tools.register(ExecTool())
+    tools.register(WebSearchTool())
     try:
         import subprocess
         subprocess.run(["playwright", "--version"], capture_output=True, timeout=5)
